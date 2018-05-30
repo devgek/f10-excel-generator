@@ -17,6 +17,8 @@ public class F10Writer {
         try {
             inputFile = new FileInputStream(new File(fileName));
             Workbook workbook = new XSSFWorkbook(inputFile);
+            inputFile.close();
+
             Sheet datatypeSheet = workbook.getSheetAt(0);
             System.out.println("sheetname:" + datatypeSheet.getSheetName());
             Iterator<Row> iterator = datatypeSheet.iterator();
@@ -24,6 +26,11 @@ public class F10Writer {
             while (iterator.hasNext()) {
 
                 Row currentRow = iterator.next();
+                if (currentRow.getRowNum() == 0) {
+                    Cell c4r0 = currentRow.getCell(4);
+                    c4r0.setCellValue("April");
+                }
+
                 if (currentRow.getRowNum() < 10 || currentRow.getRowNum() > 10) {
                     continue;
                 }
@@ -41,8 +48,7 @@ public class F10Writer {
                 c9.setCellValue("Sprint 12.1, JAMP-160");
             }
 
-            inputFile.close();
-            FileOutputStream fos = new FileOutputStream(new File("/home/moo/firma/f10-gen.xlsx"));
+            FileOutputStream fos = new FileOutputStream(new File("/home/moo/firma/f10/f10-gen.xlsx"));
             workbook.write(fos);
             fos.close();
 

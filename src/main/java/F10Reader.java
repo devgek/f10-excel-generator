@@ -20,8 +20,12 @@ public class F10Reader {
             Iterator<Row> iterator = datatypeSheet.iterator();
 
             while (iterator.hasNext()) {
-
                 Row currentRow = iterator.next();
+
+                if (currentRow.getRowNum() == 0) {
+                    Cell c4 = currentRow.getCell(4);
+                    printCell(c4);
+                }
                 if (currentRow.getRowNum() < 7 || currentRow.getRowNum() > 7) {
                     continue;
                 }
@@ -34,13 +38,7 @@ public class F10Reader {
                     //getCellTypeEnum shown as deprecated for version 3.15
                     //getCellTypeEnum ill be renamed to getCellType starting from version 4.0
                     System.out.println("");
-                    System.out.print("cell " + currentCell.getAddress().getColumn() + " type:" + currentCell.getCellTypeEnum().toString() + " ");
-                    if (currentCell.getCellTypeEnum() == CellType.STRING) {
-                        System.out.print(currentCell.getStringCellValue() + "--");
-                    } else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
-                        System.out.print(currentCell.getNumericCellValue() + "--");
-                    }
-
+                    printCell(currentCell);
                 }
                 System.out.println();
 
@@ -49,6 +47,15 @@ public class F10Reader {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void printCell(Cell cell) {
+        System.out.print("cell " + cell.getAddress().getColumn() + " type:" + cell.getCellTypeEnum().toString() + " ");
+        if (cell.getCellTypeEnum() == CellType.STRING) {
+            System.out.print(cell.getStringCellValue() + "--");
+        } else if (cell.getCellTypeEnum() == CellType.NUMERIC) {
+            System.out.print(cell.getNumericCellValue() + "--");
         }
     }
 }

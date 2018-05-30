@@ -1,5 +1,5 @@
 public class Main {
-    private static final String F10_EXCEL_FILE = "/home/moo/firma/f10.xlsx";
+    private static final String F10_EXCEL_FILE = "/home/moo/firma/f10/f10.xlsx";
 
     public static void main(String[] args) {
         F10Reader reader = new F10Reader();
