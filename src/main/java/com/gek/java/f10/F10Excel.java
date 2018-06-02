@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
@@ -13,12 +14,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import static jdk.nashorn.internal.objects.NativeDate.getDate;
 
 public class F10Excel {
     private static final String F10EXCEL = "f10-template.xlsx";
@@ -90,6 +88,7 @@ public class F10Excel {
 //            activeRow++;
 //        }
 
+        XSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
         return true;
     }
 
