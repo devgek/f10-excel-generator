@@ -7,10 +7,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,10 +23,10 @@ public class F10Excel {
     private Workbook workbook;
 
     public static F10Excel newInstance() throws IOException {
-        ClassLoader classLoader = F10Excel.class.getClassLoader();
-        File templateFile = new File(classLoader.getResource(F10EXCEL).getFile());
-        FileInputStream inputFile = new FileInputStream(templateFile);
-
+//        ClassLoader classLoader = F10Excel.class.getClassLoader();
+//        File templateFile = new File(classLoader.getResource(F10EXCEL).getFile());
+//        FileInputStream inputFile = new FileInputStream(templateFile);
+        InputStream inputFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(F10EXCEL);
         Workbook workbook = new XSSFWorkbook(inputFile);
         inputFile.close();
 
